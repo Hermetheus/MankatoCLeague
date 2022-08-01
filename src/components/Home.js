@@ -1,11 +1,7 @@
 import React from "react";
-import { Container, Image } from "react-bootstrap";
-import styled, { useTheme } from "styled-components";
-import banner from "../images/m.png";
+import { Container } from "react-bootstrap";
 
-const Home = () => {
-  const { theme } = useTheme();
-
+const Home = ({ theme }) => {
   return (
     <>
       <Container fluid theme={theme}>

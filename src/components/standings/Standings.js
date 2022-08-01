@@ -7,7 +7,6 @@ import {
   useGlobalFilter,
   usePagination,
 } from "react-table";
-import styled from "styled-components";
 import hockeyStandings from "../../data/hockeyStandings";
 import DefaultColumnFilter from "../utils/DefaultColumnFilter";
 import GlobalFilter from "../utils/GlobalFilter";
@@ -106,9 +105,6 @@ const Standings = ({ theme }) => {
     headerGroups,
     prepareRow,
     page,
-    // Instead of using 'rows', we'll use page,
-    // which has only the rows for the active page
-    rows,
 
     // Pagination Props
     // The rest of these things are super handy, too ;)

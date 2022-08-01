@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 
 const VisitorScore = (props) => {
   const { cell } = props;

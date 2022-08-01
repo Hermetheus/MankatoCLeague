@@ -2,7 +2,6 @@ import React from "react";
 import { useAsyncDebounce } from "react-table";
 
 function GlobalFilter({
-  preGlobalFilteredRows,
   globalFilter,
   setGlobalFilter,
 }) {

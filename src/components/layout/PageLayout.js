@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router";
-import { Container, Image } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Index from "../../pages";
 import Footer from "./Footer";
 import Header from "./Header";

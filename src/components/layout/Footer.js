@@ -1,7 +1,5 @@
 import React from "react";
-import { Image } from "react-bootstrap";
 import styled, { useTheme } from "styled-components";
-import banner from "../../images/m.png";
 
 const Footer = () => {
   const { theme } = useTheme();
@@ -21,7 +19,7 @@ const Footer = () => {
       {" "}
       <p>
         {" "}
-        <a href="https://www.mankato.com/">Mankato.com</a>
+        <a href="https://www.mankatocleague.com/">MankatoCLeague.com</a>
       </p>
     </Footer>
   );
