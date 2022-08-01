@@ -8,9 +8,11 @@ import {
 import useWindowSize from "../hooks/useWindowSize";
 import { lowerBracket, upperBracket } from "../data/DoubleEliminationData";
 import { darkTheme, lightTheme } from "../util/theme";
+import useBreakpoint, { SIZE_SM, SIZE_XS } from "../hooks/useBreakpoint";
+import TournamentTable from "./tournamentbracket/TournamentTable.js";
 
 const TournamentBracket = ({ theme }) => {
-  console.log(theme);
+  const breakpoint = useBreakpoint();
   const [width, height] = useWindowSize();
   const finalWidth = Math.max(width - 50, 500);
   const finalHeight = Math.max(height - 100, 500);
@@ -48,40 +50,50 @@ const TournamentBracket = ({ theme }) => {
     }),
   });
 
+  console.log(breakpoint);
+
   return (
-    <DoubleEliminationBracket
-      matches={{
-        upper: upperData.filter((data) => {
-          return data !== undefined;
-        }),
-        lower: lowerData.filter((data) => {
-          return data !== undefined;
-        }),
-      }}
-      matchComponent={Match}
-      theme={ToggleTheme}
-      options={{
-        style: {
-          roundHeader: {
-            backgroundColor: ToggleTheme.roundHeader.backgroundColor,
-            fontColor: ToggleTheme.roundHeader.fontColor,
-          },
-          connectorColor: ToggleTheme.connectorColor,
-          connectorColorHighlight: ToggleTheme.connectorColorHighlight,
-        },
-      }}
-      svgWrapper={({ children, ...props }) => (
-        <SVGViewer
-          background={ToggleTheme.svgBackground}
-          SVGBackground={ToggleTheme.svgBackground}
-          width={finalWidth - 250}
-          height={finalHeight}
-          {...props}
-        >
-          {children}
-        </SVGViewer>
+    <>
+      {/* doesn't show on mobile */}
+
+      {breakpoint !== SIZE_SM && breakpoint !== SIZE_XS && (
+        <DoubleEliminationBracket
+          matches={{
+            upper: upperData.filter((data) => {
+              return data !== undefined;
+            }),
+            lower: lowerData.filter((data) => {
+              return data !== undefined;
+            }),
+          }}
+          matchComponent={Match}
+          theme={ToggleTheme}
+          options={{
+            style: {
+              roundHeader: {
+                backgroundColor: ToggleTheme.roundHeader.backgroundColor,
+                fontColor: ToggleTheme.roundHeader.fontColor,
+              },
+              connectorColor: ToggleTheme.connectorColor,
+              connectorColorHighlight: ToggleTheme.connectorColorHighlight,
+            },
+          }}
+          svgWrapper={({ children, ...props }) => (
+            <SVGViewer
+              background={ToggleTheme.svgBackground}
+              SVGBackground={ToggleTheme.svgBackground}
+              width={finalWidth}
+              height={finalHeight}
+              {...props}
+            >
+              {children}
+            </SVGViewer>
+          )}
+        />
       )}
-    />
+      <TournamentTable />
+      {breakpoint === SIZE_SM && breakpoint === SIZE_XS && <TournamentTable />}
+    </>
   );
 };
 

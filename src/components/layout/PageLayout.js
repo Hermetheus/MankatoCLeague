@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router";
-import { Container } from "react-bootstrap";
+import { Container, Image } from "react-bootstrap";
 import Index from "../../pages";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -11,8 +11,8 @@ import TournamentPage from "../../pages/TournamentPage";
 const PageLayout = ({ theme, toggleTheme }) => {
   return (
     <>
-      <Header toggleTheme={toggleTheme} />
-      <Container>
+      <Header toggleTheme={toggleTheme} theme={theme} />
+      <Container fluid>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/teams" element={<TeamsPage />} />

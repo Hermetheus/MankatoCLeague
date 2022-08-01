@@ -1771,6 +1771,8 @@ const hockeyStandings = {
       nextMatch: 4,
       nextLoserMatch: 7,
       tournamentRound: "UB 1",
+      typeOfRound: "First Round",
+
       bracketLevel: "upper",
       date: "9-Mar",
       day: "Wed",
@@ -1788,6 +1790,8 @@ const hockeyStandings = {
       nextMatch: 5,
       nextLoserMatch: 6,
       tournamentRound: "UB 1",
+      typeOfRound: "First Round",
+
       bracketLevel: "upper",
 
       date: "9-Mar",
@@ -1806,6 +1810,8 @@ const hockeyStandings = {
       nextMatch: 5,
       nextLoserMatch: 6,
       tournamentRound: "UB 1",
+      typeOfRound: "First Round",
+
       bracketLevel: "upper",
 
       date: "9-Mar",
@@ -1824,6 +1830,8 @@ const hockeyStandings = {
       nextMatch: 10,
       nextLoserMatch: 8,
       tournamentRound: "UB 2",
+      typeOfRound: "Second Round",
+
       bracketLevel: "upper",
 
       date: "13-Mar",
@@ -1842,6 +1850,8 @@ const hockeyStandings = {
       nextMatch: 10,
       nextLoserMatch: 8,
       tournamentRound: "UB 2",
+      typeOfRound: "Second Round",
+
       bracketLevel: "upper",
 
       date: "13-Mar",
@@ -1860,6 +1870,8 @@ const hockeyStandings = {
       nextMatch: 7,
       nextLoserMatch: null,
       tournamentRound: "LB 1",
+      typeOfRound: "First Round",
+
       bracketLevel: "lower",
 
       date: "13-Mar",
@@ -1878,6 +1890,8 @@ const hockeyStandings = {
       nextMatch: 9,
       nextLoserMatch: null,
       tournamentRound: "LB 2",
+      typeOfRound: "Second Round",
+
       bracketLevel: "lower",
 
       date: "16-Mar",
@@ -1896,6 +1910,8 @@ const hockeyStandings = {
       nextMatch: 9,
       nextLoserMatch: null,
       tournamentRound: "LB 3",
+      typeOfRound: "Third Round",
+
       bracketLevel: "lower",
 
       date: "3/16/2022",
@@ -1914,6 +1930,7 @@ const hockeyStandings = {
       nextMatch: 11,
       nextLoserMatch: null,
       tournamentRound: "LB 4",
+      typeOfRound: "Fourth Round",
       bracketLevel: "lower",
       date: "3/20/2022",
       day: "Sun",
@@ -1931,6 +1948,7 @@ const hockeyStandings = {
       nextMatch: 12,
       nextLoserMatch: 11,
       tournamentRound: "UB 3",
+      typeOfRound: "Third Round",
       bracketLevel: "upper",
       date: "3/20/2022",
       day: "Sun",
@@ -1948,6 +1966,7 @@ const hockeyStandings = {
       nextMatch: 12,
       nextLoserMatch: null,
       tournamentRound: "LB 5",
+      typeOfRound: "Semi-Finals",
       bracketLevel: "lower",
       date: "3/23/2022",
       day: "Wed",
@@ -1965,8 +1984,8 @@ const hockeyStandings = {
       nextMatch: null,
       nextLoserMatch: null,
       tournamentRound: "UB 4",
+      typeOfRound: "Championship",
       bracketLevel: "upper",
-
       date: "3/27/2022",
       day: "Sun",
       time: "1:30:00 PM",
