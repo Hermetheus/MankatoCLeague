@@ -1,20 +1,27 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import {
-  useTable,
-  useSortBy,
   useFilters,
   useGlobalFilter,
   usePagination,
+  useSortBy,
+  useTable,
 } from "react-table";
 import hockeyStandings from "../../data/hockeyStandings";
+import useBreakpoint, {
+  SIZE_LG,
+  SIZE_MD,
+  SIZE_XL,
+  SIZE_XXL,
+} from "../../hooks/useBreakpoint";
+import HomeScore from "../standings/Renderers/HomeScore";
+import VisitorScore from "../standings/Renderers/VisitorScore";
 import DefaultColumnFilter from "../utils/DefaultColumnFilter";
 import GlobalFilter from "../utils/GlobalFilter";
-import HomeScore from "./Renderers/HomeScore";
-import VisitorScore from "./Renderers/VisitorScore";
 
-const Standings = ({ theme }) => {
-  const data = hockeyStandings.regularSeason;
+const TournamentTable = ({ theme }) => {
+  const breakpoint = useBreakpoint();
+  const data = hockeyStandings.Playoffs;
 
   const columns = React.useMemo(
     () => [
@@ -24,6 +31,7 @@ const Standings = ({ theme }) => {
           {
             Header: "Date",
             accessor: "date",
+            Filter: false,
           },
           {
             Header: "Time",
@@ -31,6 +39,7 @@ const Standings = ({ theme }) => {
             Cell: ({ value }) => {
               return <div>{value}</div>;
             },
+            Filter: false,
           },
           {
             Header: "Time Keeper",
@@ -64,6 +73,60 @@ const Standings = ({ theme }) => {
           },
         ],
       },
+      {
+        Header: "Playoffs",
+        columns: [
+          {
+            Header: "Round",
+            accessor: "typeOfRound",
+            Cell: ({ value }) => {
+              if (value === "Championship") {
+                return <div className="text-success">{value} Winners!</div>;
+              } else if (value === "Semi-Finals") {
+                return <div className="text-warning">{value}</div>;
+              } else {
+                return <div>{value}</div>;
+              }
+            },
+          },
+          {
+            Header: "Team Advancing",
+            accessor: "tournamentRound",
+            Cell: (props) => {
+              if (props.row.original.typeOfRound === "Championship") {
+                return (
+                  <div className="text-success">
+                    {props.row.original.homeScore >
+                    props.row.original.visitorScore
+                      ? props.row.original.home
+                      : props.row.original.visitor}{" "}
+                    are the Winners!
+                  </div>
+                );
+              } else if (props.row.original.typeOfRound === "Semi-Finals") {
+                return (
+                  <div className="text-warning">
+                    {props.row.original.homeScore >
+                    props.row.original.visitorScore
+                      ? props.row.original.home
+                      : props.row.original.visitor}{" "}
+                    got Second Place!
+                  </div>
+                );
+              } else {
+                return (
+                  <div>
+                    {props.row.original.homeScore >
+                    props.row.original.visitorScore
+                      ? props.row.original.home
+                      : props.row.original.visitor}{" "}
+                  </div>
+                );
+              }
+            },
+          },
+        ],
+      },
 
       {
         Header: "Score",
@@ -90,6 +153,17 @@ const Standings = ({ theme }) => {
     ],
     []
   );
+
+  const largeBreakpoints =
+    breakpoint === SIZE_MD &&
+    breakpoint === SIZE_LG &&
+    breakpoint === SIZE_XL &&
+    breakpoint === SIZE_XXL;
+
+  const initialState = {
+    hiddenColumns: largeBreakpoints ? [] : ["timeKeeper", "official", "pond"],
+    pageindex: 2,
+  };
 
   const defaultColumn = React.useMemo(
     () => ({
@@ -125,7 +199,7 @@ const Standings = ({ theme }) => {
     {
       columns,
       data,
-      initialState: { pageindex: 2 },
+      initialState,
       defaultColumn,
     },
     useFilters,
@@ -136,6 +210,7 @@ const Standings = ({ theme }) => {
   const generateSortingIndicator = (column) => {
     return column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : "";
   };
+
   // Render the UI for your table
   return (
     <React.Fragment>
@@ -249,4 +324,5 @@ const Standings = ({ theme }) => {
     </React.Fragment>
   );
 };
-export default Standings;
+
+export default TournamentTable;

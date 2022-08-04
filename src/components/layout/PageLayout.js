@@ -7,6 +7,7 @@ import Header from "./Header";
 import TeamsPage from "../../pages/TeamsPage";
 import StandingsPage from "../../pages/StandingsPage";
 import TournamentPage from "../../pages/TournamentPage";
+import SchedulePage from "../../pages/SchedulePage";
 
 const PageLayout = ({ theme, toggleTheme }) => {
   return (
@@ -15,7 +16,8 @@ const PageLayout = ({ theme, toggleTheme }) => {
       <Container fluid>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/teams" element={<TeamsPage />} />
+          <Route path="/teams" element={<TeamsPage theme={theme} />} />
+          <Route path="/schedule" element={<SchedulePage theme={theme} />} />
           <Route path="/standings" element={<StandingsPage theme={theme} />} />
           <Route
             path="/tournamentBracket"

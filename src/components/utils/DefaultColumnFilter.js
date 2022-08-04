@@ -2,7 +2,6 @@ import React from "react";
 
 // Define a default UI for filtering
 function DefaultColumnFilter({ column: { filterValue, setFilter } }) {
-  console.log(filterValue);
   return (
     <input
       value={filterValue || ""}

@@ -35,6 +35,9 @@ const Header = ({ toggleTheme, theme }) => {
                 <Link to="/teams">Teams</Link>
               </Nav.Link>
               <Nav.Link>
+                <Link to="/schedule">Schedule</Link>
+              </Nav.Link>
+              <Nav.Link>
                 <Link to="/standings">Standings</Link>
               </Nav.Link>
               <Nav.Link>

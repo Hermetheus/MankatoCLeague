@@ -1,0 +1,126 @@
+{
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.suggestFontSize": 14,
+  //   "editor.fontWeight": "300", // Light
+  //   "editor.fontWeight": "400", // Regular
+  "editor.fontWeight": "450", // Retina !! Only works with FiraCode-VF.ttf installed, see below when using separated font files (the normal case).
+  //   "editor.fontWeight": "500", // Medium
+  //   "editor.fontWeight": "600", // Bold
+  "workbench.editor.tabSizing": "shrink",
+  "html.format.enable": true,
+  "html.format.preserveNewLines": true,
+  "files.trimTrailingWhitespace": true,
+  // this isn't really underline but we hack it to be a thicker cursor
+  "editor.cursorStyle": "line",
+  "editor.wordWrap": "on",
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.cursorBlinking": "solid",
+  "editor.minimap.showSlider": "always",
+  "extensions.ignoreRecommendations": false,
+  "files.exclude": {
+    "**/.cache": true,
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.next": true,
+    "**/.svn": true,
+    "**/CVS": true,
+    "**/dist": false
+  },
+  "workbench.editor.tabCloseButton": "off",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "html"
+  },
+  // this lets you quick open multiple items in a row and now have the previous ones closed on you
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
+  // These are all my auto-save configs
+  "editor.formatOnSave": true,
+  // turn it off for JS
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": true
+  },
+  // Optional: If you have the prettier extension enabled for other languages like CSS and HTML, turn it off for JS since we are doing it through Eslint already
+  "eslint.alwaysShowStatus": true,
+  "editor.autoIndent": "full",
+  "window.closeWhenEmpty": true,
+  "editor.detectIndentation": false,
+  "files.insertFinalNewline": true,
+  "editor.showFoldingControls": "always",
+  "editor.find.seedSearchStringFromSelection": "always",
+  "editor.matchBrackets": "always",
+  "workbench.editor.enablePreview": true,
+  "editor.scrollBeyondLastLine": true,
+  "editor.useTabStops": true,
+  "editor.parameterHints.enabled": true,
+  "editor.suggestSelection": "recentlyUsed",
+  "workbench.tree.indent": 10,
+  "terminal.integrated.fontSize": 14,
+  "editor.lineHeight": 25,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "typescript.tsserver.log": "verbose",
+  "liveshare.featureSet": "stable",
+  "eslint.validate": [
+    "typescript",
+    "typescriptreact",
+    "javascript",
+    "javascriptreact"
+  ],
+  "editor.renderControlCharacters": true,
+  "editor.copyWithSyntaxHighlighting": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "vsicons.presets.hideExplorerArrows": true,
+  "errorLens.fontSize": "12",
+  "errorLens.fontFamily": "Comic Sans MS",
+  "errorLens.onSave": true,
+  "errorLens.enabledDiagnosticLevels": ["error", "warning", "hint"],
+  "workbench.colorCustomizations": {
+    "errorLens.hintForeground": "#ffc600A1",
+    "errorLens.hintBackground": "#ffc60003",
+    "errorLens.errorBackground": "#ff000005"
+  },
+  "errorLens.exclude": ["never (read|used)"],
+  "css.validate": true,
+  "less.validate": true,
+  "scss.validate": true,
+  "workbench.editor.closeOnFileDelete": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "editor.accessibilitySupport": "off",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "editor.minimap.side": "left",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDelete": false,
+  "workbench.list.smoothScrolling": true,
+  "editor.smoothScrolling": true,
+  "terminal.integrated.fastScrollSensitivity": 25,
+  "editor.mouseWheelScrollSensitivity": 2,
+  "editor.scrollbar.verticalScrollbarSize": 50,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "explorer.confirmDragAndDrop": false,
+  "terminal.integrated.fontFamily": "monospace",
+  "terminal.external.windowsExec": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "terminal.integrated.experimentalRestore": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "workbench.colorTheme": "Community Material Theme Darker",
+  "editor.linkedEditing": true,
+  "window.zoomLevel": -1
+}

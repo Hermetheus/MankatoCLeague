@@ -41,17 +41,6 @@ const TournamentBracket = ({ theme }) => {
   const lowerData = lowerBracket;
   const upperData = upperBracket;
 
-  console.log({
-    lower: lowerData.filter((data) => {
-      return data !== undefined;
-    }),
-    upper: upperBracket.filter((data) => {
-      return data !== undefined;
-    }),
-  });
-
-  console.log(breakpoint);
-
   return (
     <>
       {/* doesn't show on mobile */}
@@ -91,8 +80,7 @@ const TournamentBracket = ({ theme }) => {
           )}
         />
       )}
-      <TournamentTable />
-      {breakpoint === SIZE_SM && breakpoint === SIZE_XS && <TournamentTable />}
+      <TournamentTable theme={theme} />
     </>
   );
 };
