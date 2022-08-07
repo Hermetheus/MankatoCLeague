@@ -12,6 +12,7 @@ import DefaultColumnFilter from "./utils/DefaultColumnFilter";
 import GlobalFilter from "./utils/GlobalFilter";
 import HomeScore from "./standings/Renderers/HomeScore";
 import VisitorScore from "./standings/Renderers/VisitorScore";
+import moment from "moment";
 
 const Schedule = ({ theme }) => {
   const data = hockeyStandings.regularSeason;
@@ -29,7 +30,18 @@ const Schedule = ({ theme }) => {
             Header: "Time",
             accessor: "time",
             Cell: ({ value }) => {
-              return <div>{value}</div>;
+              const hoursInTheDay = (value * 24) / 1;
+
+              function convert(input) {
+                let time = moment(input, "HH:mm:ss").format("h:mm A");
+                if (time === "Invalid date") {
+                  return "Not Available";
+                } else {
+                  return time;
+                }
+              }
+
+              return <div>{convert(hoursInTheDay)}</div>;
             },
           },
           {
@@ -136,6 +148,7 @@ const Schedule = ({ theme }) => {
   const generateSortingIndicator = (column) => {
     return column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : "";
   };
+
   // Render the UI for your table
   return (
     <React.Fragment>
@@ -143,6 +156,7 @@ const Schedule = ({ theme }) => {
         preGlobalFilteredRows={preGlobalFilteredRows}
         globalFilter={globalFilter}
         setGlobalFilter={setGlobalFilter}
+        theme={theme}
       />
       <Table
         {...getTableProps()}
@@ -189,7 +203,7 @@ const Schedule = ({ theme }) => {
 	        Pagination can be built however you'd like.
 	        This is just a very basic UI implementation:
 	      */}
-      <div className="float-right mb-3">
+      <div className="d-flex justify-content-center align-items-center m-3">
         <select
           style={{
             padding: "7px",
@@ -208,7 +222,7 @@ const Schedule = ({ theme }) => {
           ))}
         </select>{" "}
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary m-1"
           style={{ marginTop: "-4px" }}
           onClick={() => gotoPage(0)}
           disabled={!canPreviousPage}
@@ -216,7 +230,7 @@ const Schedule = ({ theme }) => {
           {"<<"}
         </button>{" "}
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary m-1"
           style={{ marginTop: "-4px" }}
           onClick={() => previousPage()}
           disabled={!canPreviousPage}
@@ -230,7 +244,7 @@ const Schedule = ({ theme }) => {
           </strong>{" "}
         </span>
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary m-1"
           style={{ marginTop: "-4px" }}
           onClick={() => nextPage()}
           disabled={!canNextPage}
@@ -238,7 +252,7 @@ const Schedule = ({ theme }) => {
           {">"}
         </button>{" "}
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary m-1"
           style={{ marginTop: "-4px" }}
           onClick={() => gotoPage(pageCount - 1)}
           disabled={!canNextPage}

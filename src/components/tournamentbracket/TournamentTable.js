@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 import { Table } from "react-bootstrap";
 import {
@@ -37,7 +38,18 @@ const TournamentTable = ({ theme }) => {
             Header: "Time",
             accessor: "time",
             Cell: ({ value }) => {
-              return <div>{value}</div>;
+              const hoursInTheDay = (value * 24) / 1;
+
+              function convert(input) {
+                let time = moment(input, "HH:mm:ss").format("h:mm A");
+                if (time === "Invalid date") {
+                  return "Not Available";
+                } else {
+                  return time;
+                }
+              }
+
+              return <div>{convert(hoursInTheDay)}</div>;
             },
             Filter: false,
           },
@@ -90,7 +102,7 @@ const TournamentTable = ({ theme }) => {
             },
           },
           {
-            Header: "Team Advancing",
+            Header: "Winner",
             accessor: "tournamentRound",
             Cell: (props) => {
               if (props.row.original.typeOfRound === "Championship") {
@@ -214,11 +226,17 @@ const TournamentTable = ({ theme }) => {
   // Render the UI for your table
   return (
     <React.Fragment>
+      <div className="mt-5">
+        <h1>Tournament Statistics</h1>
+        <hr />
+      </div>
       <GlobalFilter
         preGlobalFilteredRows={preGlobalFilteredRows}
         globalFilter={globalFilter}
         setGlobalFilter={setGlobalFilter}
+        theme={theme}
       />
+
       <Table
         {...getTableProps()}
         responsive
@@ -245,6 +263,7 @@ const TournamentTable = ({ theme }) => {
             </tr>
           ))}
         </thead>
+
         <tbody {...getTableBodyProps()}>
           {page.map((row, i) => {
             prepareRow(row);
@@ -264,7 +283,7 @@ const TournamentTable = ({ theme }) => {
 	        Pagination can be built however you'd like.
 	        This is just a very basic UI implementation:
 	      */}
-      <div className="float-right mb-3">
+      <div className="d-flex justify-content-center align-items-center m-3">
         <select
           style={{
             padding: "7px",
@@ -283,7 +302,7 @@ const TournamentTable = ({ theme }) => {
           ))}
         </select>{" "}
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary m-1"
           style={{ marginTop: "-4px" }}
           onClick={() => gotoPage(0)}
           disabled={!canPreviousPage}
@@ -291,7 +310,7 @@ const TournamentTable = ({ theme }) => {
           {"<<"}
         </button>{" "}
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary m-1"
           style={{ marginTop: "-4px" }}
           onClick={() => previousPage()}
           disabled={!canPreviousPage}
@@ -305,7 +324,7 @@ const TournamentTable = ({ theme }) => {
           </strong>{" "}
         </span>
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary m-1"
           style={{ marginTop: "-4px" }}
           onClick={() => nextPage()}
           disabled={!canNextPage}
@@ -313,7 +332,7 @@ const TournamentTable = ({ theme }) => {
           {">"}
         </button>{" "}
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary m-1"
           style={{ marginTop: "-4px" }}
           onClick={() => gotoPage(pageCount - 1)}
           disabled={!canNextPage}

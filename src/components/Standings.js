@@ -1,7 +1,11 @@
 import React from "react";
+import TournamentBracket from "./TournamentBracket";
 
-const Standings = () => {
-  return <div>Standings</div>;
+const Standings = ({ theme }) => {
+  return (
+    <>
+      <TournamentBracket theme={theme} />
+    </>
+  );
 };
-
 export default Standings;

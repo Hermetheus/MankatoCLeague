@@ -1,10 +1,14 @@
 import React from "react";
-import { useTheme } from "styled-components";
 import Schedule from "../components/Schedule";
 
-const SchedulePage = () => {
-  const { theme } = useTheme();
-  return <Schedule theme={theme} />;
+const SchedulePage = ({ theme }) => {
+  return (
+    <>
+      <h1>Schedule</h1>
+      <hr />
+      <Schedule theme={theme} />
+    </>
+  );
 };
 
 export default SchedulePage;

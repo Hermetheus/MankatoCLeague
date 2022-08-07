@@ -29,7 +29,7 @@ const Header = ({ toggleTheme, theme }) => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse className="float-end">
               <Nav.Link>
-                <Link to="/">home</Link>
+                <Link to="/">Home</Link>
               </Nav.Link>
               <Nav.Link>
                 <Link to="/teams">Teams</Link>
@@ -41,7 +41,7 @@ const Header = ({ toggleTheme, theme }) => {
                 <Link to="/standings">Standings</Link>
               </Nav.Link>
               <Nav.Link>
-                <Link to="/tournamentBracket">Championship Bracket</Link>
+                <Link to="/photos">Photos</Link>
               </Nav.Link>
               <Nav.Link>
                 <Button onClick={toggleTheme} variant="primary">

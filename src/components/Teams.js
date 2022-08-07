@@ -5,7 +5,6 @@ import TeamList from "./teams/TeamList";
 
 const Teams = () => {
   const teams = hockeyTeams.teams;
-  console.log(teams);
 
   return (
     <>

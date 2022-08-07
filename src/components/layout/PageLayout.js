@@ -6,26 +6,23 @@ import Footer from "./Footer";
 import Header from "./Header";
 import TeamsPage from "../../pages/TeamsPage";
 import StandingsPage from "../../pages/StandingsPage";
-import TournamentPage from "../../pages/TournamentPage";
 import SchedulePage from "../../pages/SchedulePage";
+import PhotoPage from "../../pages/PhotoPage";
 
 const PageLayout = ({ theme, toggleTheme }) => {
   return (
     <>
       <Header toggleTheme={toggleTheme} theme={theme} />
-      <Container fluid>
+      <Container>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/teams" element={<TeamsPage theme={theme} />} />
           <Route path="/schedule" element={<SchedulePage theme={theme} />} />
           <Route path="/standings" element={<StandingsPage theme={theme} />} />
-          <Route
-            path="/tournamentBracket"
-            element={<TournamentPage theme={theme} />}
-          />
+          <Route path="/photos" element={<PhotoPage theme={theme} />} />
         </Routes>
       </Container>
-      <Footer />
+      <Footer theme={theme} />
     </>
   );
 };
