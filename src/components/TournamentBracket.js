@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   createTheme,
   DoubleEliminationBracket,
@@ -6,7 +6,10 @@ import {
   SVGViewer,
 } from "@g-loot/react-tournament-brackets";
 import useWindowSize from "../hooks/useWindowSize";
-import { lowerBracket, upperBracket } from "../data/DoubleEliminationData";
+import {
+  lowerBracketFunc,
+  upperBracketFunc,
+} from "../data/DoubleEliminationData";
 import { darkTheme, lightTheme } from "../util/theme";
 import useBreakpoint, {
   SIZE_SM,
@@ -14,13 +17,26 @@ import useBreakpoint, {
   SIZE_XXL,
 } from "../hooks/useBreakpoint";
 import TournamentTable from "./tournamentbracket/TournamentTable.js";
-import hockeyStandings from "../data/hockeyStandings";
+import { hockeyStandings } from "../graphql/Queries";
+import { useQuery } from "@apollo/client";
+import Loading from "./layout/Loading";
 
 const TournamentBracket = ({ theme }) => {
+  const [playoffData, setPlayoffData] = useState(undefined);
+  const [loadingStatus, setLoadingStatus] = useState(true);
+  const [lowerBracket, setLowerBracket] = useState(undefined);
+  const [upperBracket, setUpperBracket] = useState(undefined);
   const breakpoint = useBreakpoint();
   const [height] = useWindowSize();
-  const data = hockeyStandings.Playoffs;
   const finalHeight = Math.max(height - 100, 500);
+  const { error, loading, data } = useQuery(hockeyStandings);
+
+  useEffect(() => {
+    if (loadingStatus === true && loading === false) {
+      setPlayoffData(data);
+      setLoadingStatus(false);
+    }
+  }, [data, loading, loadingStatus]);
 
   const ToggleTheme = createTheme({
     textColor: {
@@ -46,12 +62,9 @@ const TournamentBracket = ({ theme }) => {
     svgBackground: theme === "light" ? lightTheme.body : darkTheme.body,
   });
 
-  const lowerData = lowerBracket;
-  const upperData = upperBracket;
-
   const getChampion = () => {
     let champion = "";
-    data.map((game) => {
+    playoffData.mankatoCLeague.hockeyStandings.Playoffs.map((game) => {
       if (game.typeOfRound === "Championship") {
         return (champion =
           game.homeScore > game.visitorScore ? game.home : game.visitor);
@@ -62,51 +75,73 @@ const TournamentBracket = ({ theme }) => {
 
     return champion;
   };
+  useEffect(() => {
+    if (loadingStatus === false && loading === false && !!playoffData) {
+      setLowerBracket(
+        lowerBracketFunc(playoffData.mankatoCLeague.hockeyStandings.Playoffs)
+      );
+      setUpperBracket(
+        upperBracketFunc(playoffData.mankatoCLeague.hockeyStandings.Playoffs)
+      );
+    }
+  }, [loading, loadingStatus, playoffData]);
 
   return (
     <>
-      <div className="d-flex justify-content-center align-items-center m-3">
-        <h1>{getChampion()} are your 2021-2023 Champions!</h1>
-      </div>
-      {/* doesn't show on mobile */}
-      <div>
-        {breakpoint !== SIZE_SM && breakpoint !== SIZE_XS && (
-          <DoubleEliminationBracket
-            matches={{
-              upper: upperData.filter((data) => {
-                return data !== undefined;
-              }),
-              lower: lowerData.filter((data) => {
-                return data !== undefined;
-              }),
-            }}
-            matchComponent={Match}
-            theme={ToggleTheme}
-            options={{
-              style: {
-                roundHeader: {
-                  backgroundColor: ToggleTheme.roundHeader.backgroundColor,
-                  fontColor: ToggleTheme.roundHeader.fontColor,
-                },
-                connectorColor: ToggleTheme.connectorColor,
-                connectorColorHighlight: ToggleTheme.connectorColorHighlight,
-              },
-            }}
-            svgWrapper={({ children, ...props }) => (
-              <SVGViewer
-                background={ToggleTheme.svgBackground}
-                SVGBackground={ToggleTheme.svgBackground}
-                width={breakpoint === SIZE_XXL ? "1250" : "1000"}
-                height={finalHeight}
-                {...props}
-              >
-                {children}
-              </SVGViewer>
-            )}
-          />
+      {loadingStatus === true && <Loading />}
+      {loadingStatus === false &&
+        !!playoffData &&
+        upperBracket &&
+        lowerBracket && (
+          <>
+            <div className="d-flex justify-content-center align-items-center m-3">
+              <h1>{getChampion()} are your 2021-2022 Champions!</h1>
+            </div>
+            <div>
+              {breakpoint !== SIZE_SM && breakpoint !== SIZE_XS && (
+                <DoubleEliminationBracket
+                  matches={{
+                    upper: upperBracket.filter((playoffData) => {
+                      return playoffData !== undefined;
+                    }),
+                    lower: lowerBracket.filter((playoffData) => {
+                      return playoffData !== undefined;
+                    }),
+                  }}
+                  matchComponent={Match}
+                  theme={ToggleTheme}
+                  options={{
+                    style: {
+                      roundHeader: {
+                        backgroundColor:
+                          ToggleTheme.roundHeader.backgroundColor,
+                        fontColor: ToggleTheme.roundHeader.fontColor,
+                      },
+                      connectorColor: ToggleTheme.connectorColor,
+                      connectorColorHighlight:
+                        ToggleTheme.connectorColorHighlight,
+                    },
+                  }}
+                  svgWrapper={({ children, ...props }) => (
+                    <SVGViewer
+                      background={ToggleTheme.svgBackground}
+                      SVGBackground={ToggleTheme.svgBackground}
+                      width={breakpoint === SIZE_XXL ? "1250" : "1000"}
+                      height={finalHeight}
+                      {...props}
+                    >
+                      {children}
+                    </SVGViewer>
+                  )}
+                />
+              )}
+              <TournamentTable
+                data={playoffData.mankatoCLeague.hockeyStandings.Playoffs}
+                theme={theme}
+              />
+            </div>
+          </>
         )}
-        <TournamentTable theme={theme} />
-      </div>
     </>
   );
 };

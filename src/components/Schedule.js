@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import {
   useTable,
@@ -7,16 +7,14 @@ import {
   useGlobalFilter,
   usePagination,
 } from "react-table";
-import hockeyStandings from "../data/hockeyStandings";
 import DefaultColumnFilter from "./utils/DefaultColumnFilter";
 import GlobalFilter from "./utils/GlobalFilter";
 import HomeScore from "./standings/Renderers/HomeScore";
 import VisitorScore from "./standings/Renderers/VisitorScore";
 import moment from "moment";
+import { lightTheme } from "../util/theme";
 
-const Schedule = ({ theme }) => {
-  const data = hockeyStandings.regularSeason;
-
+const Schedule = ({ data, theme }) => {
   const columns = React.useMemo(
     () => [
       {
@@ -199,16 +197,12 @@ const Schedule = ({ theme }) => {
           })}
         </tbody>
       </Table>
-      {/*
-	        Pagination can be built however you'd like.
-	        This is just a very basic UI implementation:
-	      */}
       <div className="d-flex justify-content-center align-items-center m-3">
         <select
           style={{
             padding: "7px",
             borderRadius: "3px",
-            border: "1px solid #007bff",
+            border: `1px solid ${lightTheme.accent}`,
           }}
           value={pageSize}
           onChange={(e) => {
@@ -223,7 +217,11 @@ const Schedule = ({ theme }) => {
         </select>{" "}
         <button
           className="btn btn-outline-primary m-1"
-          style={{ marginTop: "-4px" }}
+          style={{
+            marginTop: "-4px",
+            color: `${lightTheme.accent}`,
+            borderColor: `${lightTheme.accent}`,
+          }}
           onClick={() => gotoPage(0)}
           disabled={!canPreviousPage}
         >
@@ -231,7 +229,11 @@ const Schedule = ({ theme }) => {
         </button>{" "}
         <button
           className="btn btn-outline-primary m-1"
-          style={{ marginTop: "-4px" }}
+          style={{
+            marginTop: "-4px",
+            color: `${lightTheme.accent}`,
+            borderColor: `${lightTheme.accent}`,
+          }}
           onClick={() => previousPage()}
           disabled={!canPreviousPage}
         >
@@ -245,7 +247,11 @@ const Schedule = ({ theme }) => {
         </span>
         <button
           className="btn btn-outline-primary m-1"
-          style={{ marginTop: "-4px" }}
+          style={{
+            marginTop: "-4px",
+            color: `${lightTheme.accent}`,
+            borderColor: `${lightTheme.accent}`,
+          }}
           onClick={() => nextPage()}
           disabled={!canNextPage}
         >
@@ -253,7 +259,11 @@ const Schedule = ({ theme }) => {
         </button>{" "}
         <button
           className="btn btn-outline-primary m-1"
-          style={{ marginTop: "-4px" }}
+          style={{
+            marginTop: "-4px",
+            color: `${lightTheme.accent}`,
+            borderColor: `${lightTheme.accent}`,
+          }}
           onClick={() => gotoPage(pageCount - 1)}
           disabled={!canNextPage}
         >

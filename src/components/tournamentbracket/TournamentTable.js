@@ -8,7 +8,6 @@ import {
   useSortBy,
   useTable,
 } from "react-table";
-import hockeyStandings from "../../data/hockeyStandings";
 import useBreakpoint, {
   SIZE_LG,
   SIZE_MD,
@@ -20,9 +19,8 @@ import VisitorScore from "../standings/Renderers/VisitorScore";
 import DefaultColumnFilter from "../utils/DefaultColumnFilter";
 import GlobalFilter from "../utils/GlobalFilter";
 
-const TournamentTable = ({ theme }) => {
+const TournamentTable = ({ data, theme }) => {
   const breakpoint = useBreakpoint();
-  const data = hockeyStandings.Playoffs;
 
   const columns = React.useMemo(
     () => [
@@ -230,116 +228,116 @@ const TournamentTable = ({ theme }) => {
         <h1>Tournament Statistics</h1>
         <hr />
       </div>
-      <GlobalFilter
-        preGlobalFilteredRows={preGlobalFilteredRows}
-        globalFilter={globalFilter}
-        setGlobalFilter={setGlobalFilter}
-        theme={theme}
-      />
+      <>
+        <GlobalFilter
+          preGlobalFilteredRows={preGlobalFilteredRows}
+          globalFilter={globalFilter}
+          setGlobalFilter={setGlobalFilter}
+          theme={theme}
+        />
 
-      <Table
-        {...getTableProps()}
-        responsive
-        striped
-        bordered
-        hover
-        variant={theme}
-      >
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th
-                  {...column.getHeaderProps()}
-                  style={{ verticalAlign: "middle" }}
-                >
-                  <div {...column.getSortByToggleProps()}>
-                    {column.render("Header")}
-                    {generateSortingIndicator(column)}
-                  </div>
-                  <div>{column.canFilter ? column.render("Filter") : null}</div>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-
-        <tbody {...getTableBodyProps()}>
-          {page.map((row, i) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  );
-                })}
+        <Table
+          {...getTableProps()}
+          responsive
+          striped
+          bordered
+          hover
+          variant={theme}
+        >
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th
+                    {...column.getHeaderProps()}
+                    style={{ verticalAlign: "middle" }}
+                  >
+                    <div {...column.getSortByToggleProps()}>
+                      {column.render("Header")}
+                      {generateSortingIndicator(column)}
+                    </div>
+                    <div>
+                      {column.canFilter ? column.render("Filter") : null}
+                    </div>
+                  </th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </Table>
-      {/*
-	        Pagination can be built however you'd like.
-	        This is just a very basic UI implementation:
-	      */}
-      <div className="d-flex justify-content-center align-items-center m-3">
-        <select
-          style={{
-            padding: "7px",
-            borderRadius: "3px",
-            border: "1px solid #007bff",
-          }}
-          value={pageSize}
-          onChange={(e) => {
-            setPageSize(Number(e.target.value));
-          }}
-        >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>{" "}
-        <button
-          className="btn btn-outline-primary m-1"
-          style={{ marginTop: "-4px" }}
-          onClick={() => gotoPage(0)}
-          disabled={!canPreviousPage}
-        >
-          {"<<"}
-        </button>{" "}
-        <button
-          className="btn btn-outline-primary m-1"
-          style={{ marginTop: "-4px" }}
-          onClick={() => previousPage()}
-          disabled={!canPreviousPage}
-        >
-          {"<"}
-        </button>{" "}
-        <span>
-          Page{" "}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{" "}
-        </span>
-        <button
-          className="btn btn-outline-primary m-1"
-          style={{ marginTop: "-4px" }}
-          onClick={() => nextPage()}
-          disabled={!canNextPage}
-        >
-          {">"}
-        </button>{" "}
-        <button
-          className="btn btn-outline-primary m-1"
-          style={{ marginTop: "-4px" }}
-          onClick={() => gotoPage(pageCount - 1)}
-          disabled={!canNextPage}
-        >
-          {">>"}
-        </button>
-      </div>
+            ))}
+          </thead>
+
+          <tbody {...getTableBodyProps()}>
+            {page.map((row, i) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return (
+                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+        <div className="d-flex justify-content-center align-items-center m-3">
+          <select
+            style={{
+              padding: "7px",
+              borderRadius: "3px",
+              border: "1px solid #007bff",
+            }}
+            value={pageSize}
+            onChange={(e) => {
+              setPageSize(Number(e.target.value));
+            }}
+          >
+            {[10, 20, 30, 40, 50].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))}
+          </select>{" "}
+          <button
+            className="btn btn-outline-primary m-1"
+            style={{ marginTop: "-4px" }}
+            onClick={() => gotoPage(0)}
+            disabled={!canPreviousPage}
+          >
+            {"<<"}
+          </button>{" "}
+          <button
+            className="btn btn-outline-primary m-1"
+            style={{ marginTop: "-4px" }}
+            onClick={() => previousPage()}
+            disabled={!canPreviousPage}
+          >
+            {"<"}
+          </button>{" "}
+          <span>
+            Page{" "}
+            <strong>
+              {pageIndex + 1} of {pageOptions.length}
+            </strong>{" "}
+          </span>
+          <button
+            className="btn btn-outline-primary m-1"
+            style={{ marginTop: "-4px" }}
+            onClick={() => nextPage()}
+            disabled={!canNextPage}
+          >
+            {">"}
+          </button>{" "}
+          <button
+            className="btn btn-outline-primary m-1"
+            style={{ marginTop: "-4px" }}
+            onClick={() => gotoPage(pageCount - 1)}
+            disabled={!canNextPage}
+          >
+            {">>"}
+          </button>
+        </div>
+      </>
     </React.Fragment>
   );
 };

@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import useBreakpoint, { SIZE_SM, SIZE_XS } from "../../hooks/useBreakpoint";
+import { Teams } from "../../util/teams";
 import { darkTheme, lightTheme } from "../../util/theme";
 
 const Footer = ({ theme }) => {
+  const breakpoint = useBreakpoint();
   const Footer = styled.footer`
     background-color: ${theme === "light"
       ? lightTheme.navbar
@@ -16,13 +19,18 @@ const Footer = ({ theme }) => {
     text-align: center;
     font-family: "Montserrat", sans-serif;
   `;
+
   return (
     <Footer>
-      {" "}
-      <p>
-        {" "}
-        <a href="https://www.mankatocleague.com/">MankatoCLeague.com</a>
-      </p>
+      <div className="d-flex justify-content-center align-items-center">
+        {Object.keys(Teams).map((key) => {
+          return (
+            breakpoint !== SIZE_SM &&
+            SIZE_XS && <div className="footer-teams"> {Teams[key]} </div>
+          );
+        })}
+      </div>
+      <hr />
     </Footer>
   );
 };

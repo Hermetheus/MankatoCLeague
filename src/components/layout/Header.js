@@ -20,12 +20,12 @@ const Header = ({ toggleTheme, theme }) => {
         collapseOnSelect
       >
         <Container fluid>
-          <Navbar.Brand>
-            <Link to="/">
-              <h3>Mankato C League</h3>
+          <Navbar.Brand className="nav-links">
+            <Link className="nav-links" to="/">
+              <h3 className="btn">Mankato C League</h3>
             </Link>
           </Navbar.Brand>
-          <Nav>
+          <Nav className="nav d-flex">
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse className="float-end">
               <Nav.Link>
@@ -44,7 +44,17 @@ const Header = ({ toggleTheme, theme }) => {
                 <Link to="/photos">Photos</Link>
               </Nav.Link>
               <Nav.Link>
-                <Button onClick={toggleTheme} variant="primary">
+                <Button
+                  onClick={toggleTheme}
+                  variant="primary"
+                  style={{
+                    marginTop: "-4px",
+                    color: `${lightTheme.accent}`,
+                    backgroundColor:
+                      theme === "light" ? lightTheme.body : darkTheme.body,
+                    borderColor: `${lightTheme.accent}`,
+                  }}
+                >
                   {theme === "light" ? "Light" : "Dark"}
                 </Button>
               </Nav.Link>

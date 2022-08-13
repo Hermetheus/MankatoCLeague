@@ -1,5 +1,6 @@
 import React from "react";
 import { useAsyncDebounce } from "react-table";
+import { lightTheme } from "../../util/theme";
 
 function GlobalFilter({ globalFilter, setGlobalFilter, theme }) {
   const [value, setValue] = React.useState(globalFilter);
@@ -19,7 +20,7 @@ function GlobalFilter({ globalFilter, setGlobalFilter, theme }) {
           }}
           style={{
             width: "150px",
-            border: "2px solid #000000",
+            border: `1px solid ${lightTheme.accent}`,
             borderRadius: "6px",
             fontSize: "20px",
             padding: "2px",

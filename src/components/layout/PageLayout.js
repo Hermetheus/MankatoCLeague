@@ -15,7 +15,7 @@ const PageLayout = ({ theme, toggleTheme }) => {
       <Header toggleTheme={toggleTheme} theme={theme} />
       <Container>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<Index theme={theme} />} />
           <Route path="/teams" element={<TeamsPage theme={theme} />} />
           <Route path="/schedule" element={<SchedulePage theme={theme} />} />
           <Route path="/standings" element={<StandingsPage theme={theme} />} />
