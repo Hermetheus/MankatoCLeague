@@ -8,14 +8,7 @@ const Teams = () => {
 
   return (
     <>
-      <Container>
-        <Row>
-          <Col>
-            <TeamList />
-          </Col>
-          <Col></Col>
-        </Row>
-      </Container>
+      <TeamList />
     </>
   );
 };

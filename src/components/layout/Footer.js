@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { Col, Row } from "react-bootstrap";
 import useBreakpoint, { SIZE_SM, SIZE_XS } from "../../hooks/useBreakpoint";
 import { Teams } from "../../util/teams";
 import { darkTheme, lightTheme } from "../../util/theme";
+import FooterTeams from "./footer/FooterTeams";
 
 const Footer = ({ theme }) => {
   const breakpoint = useBreakpoint();
@@ -22,14 +24,11 @@ const Footer = ({ theme }) => {
 
   return (
     <Footer>
-      <div className="d-flex justify-content-center align-items-center">
+      <Row className="footer-teams">
         {Object.keys(Teams).map((key) => {
-          return (
-            breakpoint !== SIZE_SM &&
-            SIZE_XS && <div className="footer-teams"> {Teams[key]} </div>
-          );
+          return <FooterTeams teams={Teams[key]} />;
         })}
-      </div>
+      </Row>
       <hr />
     </Footer>
   );

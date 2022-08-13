@@ -1,23 +1,41 @@
-import React from "react";
-import useApi from "../../hooks/useApi";
+import { useQuery } from "@apollo/client";
+import React, { useEffect, useState } from "react";
+import { Row } from "react-bootstrap";
+import { hockeyTeams } from "../../graphql/Queries";
+import EachTeam from "./EachTeam";
 
 const TeamList = () => {
-  const { data, loading } = useApi(
-    "https://jsonplaceholder.typicode.com/posts"
-  );
+  const [loadingStatus, setLoadingStatus] = useState(true);
+  const [teamData, setTeamData] = useState([]);
+  const { error, loading, data } = useQuery(hockeyTeams);
+
+  useEffect(() => {
+    if (loadingStatus === true && loading === false) {
+      setTeamData(data);
+
+      setLoadingStatus(false);
+    }
+  }, [data, loading, loadingStatus]);
 
   return (
-    <div>
-      {!!loading ? (
+    <>
+      {!!loadingStatus ? (
         <span>Loading...</span>
       ) : (
         <>
-          {data.map((item) => {
-            return <div key={item.id}>{item.title}</div>;
-          })}
+          {!!data &&
+            !!teamData &&
+            loadingStatus === false &&
+            loading === false && (
+              <Row>
+                {teamData.mankatoCLeagueTeamsCollection.items.map((item) => {
+                  return <EachTeam team={item} />;
+                })}
+              </Row>
+            )}
         </>
       )}
-    </div>
+    </>
   );
 };
 

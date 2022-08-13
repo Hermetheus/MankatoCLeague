@@ -59,8 +59,6 @@ export const GlobalCss = createGlobalStyle`
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    height: auto;
-    width: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 21px;
@@ -70,6 +68,8 @@ export const GlobalCss = createGlobalStyle`
     text-transform: uppercase;
     flex-basis: 11%;
     overflow: hidden;
+    justify-content: center;
+    align-items: center;
   }
 
   /* Navbar */
@@ -103,5 +103,36 @@ export const GlobalCss = createGlobalStyle`
     text-transform: uppercase;
     flex-basis: 15%;
     text-decoration: none;
+  }
+
+  /* Teams */
+
+
+  .teams-title {
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: .08em;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    flex-basis: 11%;
+  }
+
+
+  .team-player {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 21px;
+    letter-spacing: .08em;
+    margin: 0 0 8px;
+    opacity: .5;
+    text-transform: uppercase;
+    flex-basis: 11%;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
   }
 `;

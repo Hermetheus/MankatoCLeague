@@ -7,3 +7,20 @@ export const hockeyStandings = gql`
     }
   }
 `;
+
+export const hockeyTeams = gql`
+  query {
+    mankatoCLeagueTeamsCollection {
+      items {
+        sponsor
+        team
+        teamPlayers
+        teamPhoto {
+          url
+        }
+        teamYear
+        currentChampions
+      }
+    }
+  }
+`;
