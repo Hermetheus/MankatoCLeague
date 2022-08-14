@@ -1,36 +1,38 @@
 import React from "react";
-import styled from "styled-components";
-import { Col, Row } from "react-bootstrap";
-import useBreakpoint, { SIZE_SM, SIZE_XS } from "../../hooks/useBreakpoint";
+import { Button, Row } from "react-bootstrap";
 import { Teams } from "../../util/teams";
 import { darkTheme, lightTheme } from "../../util/theme";
 import FooterTeams from "./footer/FooterTeams";
 
-const Footer = ({ theme }) => {
-  const breakpoint = useBreakpoint();
-  const Footer = styled.footer`
-    background-color: ${theme === "light"
-      ? lightTheme.navbar
-      : darkTheme.navbar};
-    color: ${theme === "light" ? "#2f2f2f" : "#f5f5f5"};
-    padding: 1rem;
-    text-align: center;
-    position: absolute;
-    width: 100%;
-    clear: both;
-    text-align: center;
-    font-family: "Montserrat", sans-serif;
-  `;
-
+const Footer = ({ toggleTheme, theme }) => {
   return (
-    <Footer>
+    <div className="footer">
       <Row className="footer-teams">
         {Object.keys(Teams).map((key) => {
-          return <FooterTeams teams={Teams[key]} />;
+          return <FooterTeams key={key} teams={Teams[key]} />;
         })}
       </Row>
-      <hr />
-    </Footer>
+      <hr
+        style={{
+          color: lightTheme.accent,
+        }}
+      />
+      <div>
+        <Button
+          onClick={toggleTheme}
+          variant="primary"
+          style={{
+            marginTop: "-4px",
+            color: `${lightTheme.accent}`,
+            backgroundColor:
+              theme === "light" ? lightTheme.body : darkTheme.body,
+            borderColor: `${lightTheme.accent}`,
+          }}
+        >
+          {theme === "light" ? "Light" : "Dark"}
+        </Button>
+      </div>
+    </div>
   );
 };
 

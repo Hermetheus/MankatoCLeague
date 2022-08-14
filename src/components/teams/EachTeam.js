@@ -1,11 +1,12 @@
 import React from "react";
 import { Col, Image, Row } from "react-bootstrap";
+import { lightTheme } from "../../util/theme";
 
 const EachTeam = ({ team }) => {
   return (
     <Col lg="6">
       <div className="m-1 p-2">
-        <div className="">
+        <div>
           <h1 className="teams-title justify-content-center align-items-center d-flex text-center m-2">
             {team.sponsor} {team.team}
           </h1>
@@ -13,11 +14,15 @@ const EachTeam = ({ team }) => {
             {team.teamYear}
           </h2>
         </div>
-        <hr />
-        <Row className="">
-          {team.teamPlayers.map((player) => {
+        <hr
+          style={{
+            color: lightTheme.accent,
+          }}
+        />{" "}
+        <Row>
+          {team.teamPlayers.map((player, key) => {
             return (
-              <Col fluid lg="6" md="6" sm="6" xs="6">
+              <Col lg="6" md="6" sm="6" xs="6" key={key}>
                 <div className="team-player d-flex justify-content-center align-items-center">
                   {player}
                 </div>

@@ -5,13 +5,13 @@ import PageLayout from "./components/layout/PageLayout";
 import { useDarkMode } from "./hooks/useDarkMode";
 import { GlobalCss } from "./util/globalCss";
 import { darkTheme, lightTheme } from "./util/theme";
+import { firebase } from "./util/firebase";
 
 import {
   ApolloClient,
   createHttpLink,
   InMemoryCache,
   ApolloProvider,
-  HttpLink,
   from,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
@@ -20,10 +20,10 @@ function App() {
   const [theme, toggleTheme] = useDarkMode();
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
-  const errorLink = onError(({ graphqlErrors, networkError }) => {
+  const errorLink = onError(({ graphqlErrors }) => {
     if (graphqlErrors) {
-      graphqlErrors.map(({ message, location, path }) => {
-        alert(`Graphql error ${message}`);
+      graphqlErrors.map(({ message }) => {
+        return alert(`Graphql error ${message}`);
       });
     }
   });

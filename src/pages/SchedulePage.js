@@ -7,7 +7,7 @@ import Loading from "../components/layout/Loading";
 const SchedulePage = ({ theme }) => {
   const [scheduleData, setScheduleData] = useState(undefined);
   const [loadingStatus, setLoadingStatus] = useState(true);
-  const { error, loading, data } = useQuery(hockeyStandings);
+  const { loading, data } = useQuery(hockeyStandings);
 
   const getScheduleData = useCallback(() => {
     if (!!data && loading === false) {
@@ -28,7 +28,11 @@ const SchedulePage = ({ theme }) => {
   return (
     <>
       <h1>Schedule</h1>
-      <hr />
+      <hr
+        style={{
+          color: theme.accent,
+        }}
+      />{" "}
       {!!loadingStatus && <Loading />}
       {!!scheduleData && <Schedule data={scheduleData} theme={theme} />}
     </>

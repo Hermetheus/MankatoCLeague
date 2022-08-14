@@ -4,6 +4,6 @@ export const Teams = {
   Warriors: "Warriors",
   Mammoths: "Mammoths",
   Pirates: "Pirates",
-  Stingrays: "Weelborg Chev",
+  Stingrays: "Stingrays",
   Eagles: "Eagles",
 };

@@ -7,7 +7,7 @@ import EachTeam from "./EachTeam";
 const TeamList = () => {
   const [loadingStatus, setLoadingStatus] = useState(true);
   const [teamData, setTeamData] = useState([]);
-  const { error, loading, data } = useQuery(hockeyTeams);
+  const { loading, data } = useQuery(hockeyTeams);
 
   useEffect(() => {
     if (loadingStatus === true && loading === false) {
@@ -28,9 +28,11 @@ const TeamList = () => {
             loadingStatus === false &&
             loading === false && (
               <Row>
-                {teamData.mankatoCLeagueTeamsCollection.items.map((item) => {
-                  return <EachTeam team={item} />;
-                })}
+                {teamData.mankatoCLeagueTeamsCollection.items.map(
+                  (item, key) => {
+                    return <EachTeam key={key} team={item} />;
+                  }
+                )}
               </Row>
             )}
         </>

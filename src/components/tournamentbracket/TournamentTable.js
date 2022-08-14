@@ -14,6 +14,7 @@ import useBreakpoint, {
   SIZE_XL,
   SIZE_XXL,
 } from "../../hooks/useBreakpoint";
+import { lightTheme } from "../../util/theme";
 import HomeScore from "../standings/Renderers/HomeScore";
 import VisitorScore from "../standings/Renderers/VisitorScore";
 import DefaultColumnFilter from "../utils/DefaultColumnFilter";
@@ -91,7 +92,7 @@ const TournamentTable = ({ data, theme }) => {
             accessor: "typeOfRound",
             Cell: ({ value }) => {
               if (value === "Championship") {
-                return <div className="text-success">{value} Winners!</div>;
+                return <div className="text-success">{value}</div>;
               } else if (value === "Semi-Finals") {
                 return <div className="text-warning">{value}</div>;
               } else {
@@ -110,7 +111,7 @@ const TournamentTable = ({ data, theme }) => {
                     props.row.original.visitorScore
                       ? props.row.original.home
                       : props.row.original.visitor}{" "}
-                    are the Winners!
+                    are your Championship Winners!
                   </div>
                 );
               } else if (props.row.original.typeOfRound === "Semi-Finals") {
@@ -226,7 +227,11 @@ const TournamentTable = ({ data, theme }) => {
     <React.Fragment>
       <div className="mt-5">
         <h1>Tournament Statistics</h1>
-        <hr />
+        <hr
+          style={{
+            color: lightTheme.accent,
+          }}
+        />{" "}
       </div>
       <>
         <GlobalFilter

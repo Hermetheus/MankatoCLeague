@@ -29,7 +29,7 @@ const TournamentBracket = ({ theme }) => {
   const breakpoint = useBreakpoint();
   const [height] = useWindowSize();
   const finalHeight = Math.max(height - 100, 500);
-  const { error, loading, data } = useQuery(hockeyStandings);
+  const { loading, data } = useQuery(hockeyStandings);
 
   useEffect(() => {
     if (loadingStatus === true && loading === false) {
@@ -44,21 +44,22 @@ const TournamentBracket = ({ theme }) => {
       highlighted: "#07090D",
       dark: "#3E414D",
     },
-    matchBackground: { wonColor: "#FB9039", lostColor: "#646C79" },
+    matchBackground: { wonColor: lightTheme.accent, lostColor: "#646C79" },
     score: {
-      background: { wonColor: "#FB9039", lostColor: "#646C79" },
+      background: { wonColor: lightTheme.accent, lostColor: "#646C79" },
       text: { highlightedWonColor: "#198754", highlightedLostColor: "#DC3545" },
     },
     border: {
       color: "#CED1F2",
-      highlightedColor: "#FB9039",
+      highlightedColor: lightTheme.accent,
     },
     roundHeader: {
-      backgroundColor: "#1F3044",
+      backgroundColor:
+        theme === "light" ? lightTheme.toggleBorder : darkTheme.toggleBorder,
       fontColor: theme === "light" ? "#000" : "#fff",
     },
     connectorColor: "#CED1F2",
-    connectorColorHighlight: "#FB9039",
+    connectorColorHighlight: lightTheme.accent,
     svgBackground: theme === "light" ? lightTheme.body : darkTheme.body,
   });
 

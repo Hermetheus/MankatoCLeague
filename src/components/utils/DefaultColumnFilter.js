@@ -1,10 +1,8 @@
 import React from "react";
-import { useDarkMode } from "../../hooks/useDarkMode";
 import { lightTheme } from "../../util/theme";
 
 // Define a default UI for filtering
 function DefaultColumnFilter({ column: { filterValue, setFilter } }) {
-  const [theme] = useDarkMode();
   return (
     <input
       value={filterValue || ""}
