@@ -187,9 +187,9 @@ export const GlobalCss = createGlobalStyle`
       }
 
       /* progress bar styles */
-.progress-bar{
-  height: 5px;
-  background: var(--primary);
-  margin-top: 20px;
-}
+      .progress-bar {
+         height: 5px;
+        background: ${({ theme }) => theme.accent};
+        margin-top: 20px;
+      }
 `;
