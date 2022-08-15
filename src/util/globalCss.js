@@ -23,9 +23,19 @@ export const GlobalCss = createGlobalStyle`
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    padding: 20px;
+    margin: 20px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  .nav-item:hover {
+    color: ${({ theme }) => theme.body};
+    background-color: ${({ theme }) =>
+      theme === "light" ? theme.text : theme.text};
+  }
+
+  .active {
+    border-bottom: 2px solid ${({ theme }) => theme.accent};
   }
 
   /* Footer */
@@ -139,8 +149,7 @@ export const GlobalCss = createGlobalStyle`
    #contact-form {
         background: ${({ theme }) => theme.body};
         color: ${({ theme }) => theme.text};
-        padding: 20px;
-        margin: 20px;
+        margin-top: 10px;
         box-shadow: 0 11px 15px -7px rgba(0, 0, 0, .2), 0 24px 38px 3px rgba(0, 0, 0, .14), 0 9px 46px 8px rgba(0, 0, 0, .12);
         input,
         textarea {

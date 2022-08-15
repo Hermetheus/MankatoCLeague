@@ -38,7 +38,7 @@ const Home = ({ theme }) => {
       {loadingStatus === true && <Loading />}
       {loadingStatus === false && !!playOffData && (
         <>
-          <div className=" d-flex flex-column justify-content-center align-items-center align-content-center">
+          <div className=" d-flex flex-column justify-content-center align-items-center align-content-center text-center">
             <h1>
               Congratulations to the {getChampion()} on their 2021 - 2022
               Champions!

@@ -12,7 +12,7 @@ import PhotoPage from "../../pages/PhotoPage";
 const PageLayout = ({ theme, toggleTheme }) => {
   return (
     <>
-      <Header theme={theme} />
+      <Header theme={theme} toggleTheme={toggleTheme} />
       <Container>
         <Routes>
           <Route path="/" element={<Index theme={theme} />} />
@@ -22,7 +22,7 @@ const PageLayout = ({ theme, toggleTheme }) => {
           <Route path="/photos" element={<PhotoPage theme={theme} />} />
         </Routes>
       </Container>
-      <Footer toggleTheme={toggleTheme} theme={theme} />
+      <Footer theme={theme} />
     </>
   );
 };

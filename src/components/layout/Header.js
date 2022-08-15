@@ -1,14 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import { Nav, Navbar, Button, Image } from "react-bootstrap";
 import { darkTheme, lightTheme } from "../../util/theme";
-import { Image } from "react-bootstrap";
 import banner from "../../images/m.png";
+import { useLocation } from "react-router";
 import headerHomeImage from "../../images/MCL-removebg-preview.png";
+import { AiFillFacebook } from "react-icons/ai";
+import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 
-const Header = ({ theme }) => {
+const Header = ({ theme, toggleTheme }) => {
+  const location = useLocation();
+
+  console.log(location);
   return (
     <>
       <Navbar
@@ -34,22 +38,49 @@ const Header = ({ theme }) => {
               aria-controls="responsive-navbar-nav"
             />
             <Navbar.Collapse className="float-end">
-              <Nav.Item>
+              <Nav.Item className={location.pathname === "/" && "active"}>
                 <Link to="/">Home</Link>
               </Nav.Item>
-              <Nav.Item>
+              <Nav.Item className={location.pathname === "/teams" && "active"}>
                 <Link to="/teams">Teams</Link>
               </Nav.Item>
-              <Nav.Item>
+              <Nav.Item
+                className={location.pathname === "/schedule" && "active"}
+              >
                 <Link to="/schedule">Schedule</Link>
               </Nav.Item>
-              <Nav.Item>
+              <Nav.Item
+                className={location.pathname === "/standings" && "active"}
+              >
                 <Link to="/standings">Standings</Link>
               </Nav.Item>
-              <Nav.Item>
+              <Nav.Item className={location.pathname === "/photos" && "active"}>
                 <Link to="/photos">Photos</Link>
               </Nav.Item>
-              <Nav.Link></Nav.Link>
+              <Nav.Item>
+                <Button
+                  onClick={toggleTheme}
+                  variant="primary"
+                  style={{
+                    marginTop: "-4px",
+                    color: `${lightTheme.accent}`,
+                    backgroundColor:
+                      theme === "light" ? lightTheme.body : darkTheme.body,
+                    borderColor: `${lightTheme.accent}`,
+                  }}
+                >
+                  {theme === "light" ? <BsFillSunFill /> : <BsFillMoonFill />}
+                </Button>
+              </Nav.Item>
+              <Nav.Item>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.facebook.com/groups/571223759607584/"
+                >
+                  <AiFillFacebook size={"2em"} />
+                </a>
+              </Nav.Item>
             </Navbar.Collapse>
           </Nav>
         </Container>
