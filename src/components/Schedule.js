@@ -23,6 +23,19 @@ const Schedule = ({ data, theme }) => {
           {
             Header: "Date",
             accessor: "date",
+            Cell: ({ value }) => {
+              function xlSerialToJsDate(value) {
+                return new Date(
+                  -2209075200000 + (value - (value < 61 ? 0 : 1)) * 86400000
+                );
+              }
+
+              const formatDate = moment(xlSerialToJsDate(value)).format(
+                "MM/DD/YYYY"
+              );
+
+              return <div>{formatDate}</div>;
+            },
           },
           {
             Header: "Time",

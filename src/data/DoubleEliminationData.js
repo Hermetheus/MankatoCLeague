@@ -1,13 +1,27 @@
+import moment from "moment";
+
 const upperBracketFunc = (data) =>
   data.map((match) => {
+    function xlSerialToJsDate(value) {
+      return new Date(
+        -2209075200000 + (value - (value < 61 ? 0 : 1)) * 86400000
+      );
+    }
+
+    const formatDate = moment(xlSerialToJsDate(match.date)).format(
+      "YYYY/MM/DD"
+    );
+
     if (match.bracketLevel === "upper") {
+      console.log(match.nextLoserMatch);
+
       return {
         id: match.id,
         name: `${match.home} vs ${match.visitor}`,
         nextMatchId: match.nextMatch,
         nextLooserMatchId: match.nextLoserMatch,
         tournamentRoundText: match.tournamentRound,
-        starttime: match.date,
+        starttime: formatDate,
         state: "SCORE_DONE",
         participants: [
           {
@@ -26,11 +40,23 @@ const upperBracketFunc = (data) =>
           },
         ],
       };
+    } else {
+      return null;
     }
   });
 
 const lowerBracketFunc = (data) =>
   data.map((match) => {
+    function xlSerialToJsDate(value) {
+      return new Date(
+        -2209075200000 + (value - (value < 61 ? 0 : 1)) * 86400000
+      );
+    }
+
+    const formatDate = moment(xlSerialToJsDate(match.date)).format(
+      "YYYY-MM-DD"
+    );
+
     if (match.bracketLevel === "lower") {
       return {
         id: match.id,
@@ -38,7 +64,7 @@ const lowerBracketFunc = (data) =>
         nextMatchId: match.nextMatch,
         nextLooserMatchId: match.nextLoserMatch,
         tournamentRoundText: match.tournamentRound,
-        starttime: match.date,
+        starttime: formatDate,
         state: "SCORE_DONE",
         participants: [
           {
@@ -57,6 +83,8 @@ const lowerBracketFunc = (data) =>
           },
         ],
       };
+    } else {
+      return null;
     }
   });
 
