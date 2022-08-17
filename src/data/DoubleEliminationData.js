@@ -13,8 +13,6 @@ const upperBracketFunc = (data) =>
     );
 
     if (match.bracketLevel === "upper") {
-      console.log(match.nextLoserMatch);
-
       return {
         id: match.id,
         name: `${match.home} vs ${match.visitor}`,
@@ -40,8 +38,6 @@ const upperBracketFunc = (data) =>
           },
         ],
       };
-    } else {
-      return null;
     }
   });
 
@@ -83,8 +79,6 @@ const lowerBracketFunc = (data) =>
           },
         ],
       };
-    } else {
-      return null;
     }
   });
 

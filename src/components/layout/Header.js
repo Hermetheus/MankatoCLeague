@@ -12,7 +12,6 @@ import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 const Header = ({ theme, toggleTheme }) => {
   const location = useLocation();
 
-  console.log(location);
   return (
     <>
       <Navbar

@@ -92,8 +92,8 @@ const TournamentBracket = ({ theme }) => {
       {loadingStatus === true && <Loading />}
       {loadingStatus === false &&
         !!playoffData &&
-        upperBracket &&
-        lowerBracket && (
+        !!upperBracket &&
+        !!lowerBracket && (
           <>
             {!!playoffData.mankatoCLeague.hockeyStandings.playoffs && (
               <>
