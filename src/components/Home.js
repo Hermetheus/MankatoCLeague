@@ -21,7 +21,7 @@ const Home = ({ theme }) => {
 
   const getChampion = () => {
     let champion = "";
-    playOffData.mankatoCLeague.hockeyStandings.Playoffs.map((game) => {
+    playOffData.mankatoCLeague.hockeyStandings.playoffs.map((game) => {
       if (game.typeOfRound === "Championship") {
         return (champion =
           game.homeScore > game.visitorScore ? game.home : game.visitor);

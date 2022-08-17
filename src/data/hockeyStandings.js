@@ -1765,14 +1765,13 @@ const hockeyStandings = {
       official: "Glen",
     },
   ],
-  Playoffs: [
+  playoffs: [
     {
       id: 1,
       nextMatch: 4,
       nextLoserMatch: 7,
       tournamentRound: "UB 1",
       typeOfRound: "First Round",
-
       bracketLevel: "upper",
       date: "9-Mar",
       day: "Wed",
@@ -1871,9 +1870,7 @@ const hockeyStandings = {
       nextLoserMatch: null,
       tournamentRound: "LB 1",
       typeOfRound: "First Round",
-
       bracketLevel: "lower",
-
       date: "13-Mar",
       day: "Sun",
       time: 0.4166666666666667,

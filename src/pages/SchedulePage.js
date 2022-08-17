@@ -13,7 +13,7 @@ const SchedulePage = ({ theme }) => {
     if (!!data && loading === false) {
       let combinedSchedule = [].concat(
         data.mankatoCLeague.hockeyStandings.regularSeason,
-        data.mankatoCLeague.hockeyStandings.Playoffs
+        data.mankatoCLeague.hockeyStandings.playoffs
       );
       setScheduleData(combinedSchedule);
     }

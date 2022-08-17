@@ -85,7 +85,7 @@ const TournamentTable = ({ data, theme }) => {
         ],
       },
       {
-        Header: "Playoffs",
+        Header: "playoffs",
         columns: [
           {
             Header: "Round",

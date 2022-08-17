@@ -65,7 +65,7 @@ const TournamentBracket = ({ theme }) => {
 
   const getChampion = () => {
     let champion = "";
-    playoffData.mankatoCLeague.hockeyStandings.Playoffs.map((game) => {
+    playoffData.mankatoCLeague.hockeyStandings.playoffs.map((game) => {
       if (game.typeOfRound === "Championship") {
         return (champion =
           game.homeScore > game.visitorScore ? game.home : game.visitor);
@@ -79,10 +79,10 @@ const TournamentBracket = ({ theme }) => {
   useEffect(() => {
     if (loadingStatus === false && loading === false && !!playoffData) {
       setLowerBracket(
-        lowerBracketFunc(playoffData.mankatoCLeague.hockeyStandings.Playoffs)
+        lowerBracketFunc(playoffData.mankatoCLeague.hockeyStandings.playoffs)
       );
       setUpperBracket(
-        upperBracketFunc(playoffData.mankatoCLeague.hockeyStandings.Playoffs)
+        upperBracketFunc(playoffData.mankatoCLeague.hockeyStandings.playoffs)
       );
     }
   }, [loading, loadingStatus, playoffData]);
@@ -95,52 +95,56 @@ const TournamentBracket = ({ theme }) => {
         upperBracket &&
         lowerBracket && (
           <>
-            <div className="d-flex justify-content-center align-items-center m-3">
-              <h1>{getChampion()} are your 2021-2022 Champions!</h1>
-            </div>
-            <div>
-              {breakpoint !== SIZE_SM && breakpoint !== SIZE_XS && (
-                <DoubleEliminationBracket
-                  matches={{
-                    upper: upperBracket.filter((playoffData) => {
-                      return playoffData !== undefined;
-                    }),
-                    lower: lowerBracket.filter((playoffData) => {
-                      return playoffData !== undefined;
-                    }),
-                  }}
-                  matchComponent={Match}
-                  theme={ToggleTheme}
-                  options={{
-                    style: {
-                      roundHeader: {
-                        backgroundColor:
-                          ToggleTheme.roundHeader.backgroundColor,
-                        fontColor: ToggleTheme.roundHeader.fontColor,
-                      },
-                      connectorColor: ToggleTheme.connectorColor,
-                      connectorColorHighlight:
-                        ToggleTheme.connectorColorHighlight,
-                    },
-                  }}
-                  svgWrapper={({ children, ...props }) => (
-                    <SVGViewer
-                      background={ToggleTheme.svgBackground}
-                      SVGBackground={ToggleTheme.svgBackground}
-                      width={breakpoint === SIZE_XXL ? "1250" : "1000"}
-                      height={finalHeight}
-                      {...props}
-                    >
-                      {children}
-                    </SVGViewer>
+            {!!playoffData.mankatoCLeague.hockeyStandings.playoffs && (
+              <>
+                <div className="d-flex justify-content-center align-items-center m-3">
+                  <h1>{getChampion()} are your 2021-2022 Champions!</h1>
+                </div>
+                <div>
+                  {breakpoint !== SIZE_SM && breakpoint !== SIZE_XS && (
+                    <DoubleEliminationBracket
+                      matches={{
+                        upper: upperBracket.filter((playoffData) => {
+                          return playoffData !== undefined;
+                        }),
+                        lower: lowerBracket.filter((playoffData) => {
+                          return playoffData !== undefined;
+                        }),
+                      }}
+                      matchComponent={Match}
+                      theme={ToggleTheme}
+                      options={{
+                        style: {
+                          roundHeader: {
+                            backgroundColor:
+                              ToggleTheme.roundHeader.backgroundColor,
+                            fontColor: ToggleTheme.roundHeader.fontColor,
+                          },
+                          connectorColor: ToggleTheme.connectorColor,
+                          connectorColorHighlight:
+                            ToggleTheme.connectorColorHighlight,
+                        },
+                      }}
+                      svgWrapper={({ children, ...props }) => (
+                        <SVGViewer
+                          background={ToggleTheme.svgBackground}
+                          SVGBackground={ToggleTheme.svgBackground}
+                          width={breakpoint === SIZE_XXL ? "1250" : "1000"}
+                          height={finalHeight}
+                          {...props}
+                        >
+                          {children}
+                        </SVGViewer>
+                      )}
+                    />
                   )}
-                />
-              )}
-              <TournamentTable
-                data={playoffData.mankatoCLeague.hockeyStandings.Playoffs}
-                theme={theme}
-              />
-            </div>
+                  <TournamentTable
+                    data={playoffData.mankatoCLeague.hockeyStandings.playoffs}
+                    theme={theme}
+                  />
+                </div>
+              </>
+            )}
           </>
         )}
     </>
