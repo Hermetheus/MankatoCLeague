@@ -19,6 +19,7 @@ import HomeScore from "../standings/Renderers/HomeScore";
 import VisitorScore from "../standings/Renderers/VisitorScore";
 import DefaultColumnFilter from "../utils/DefaultColumnFilter";
 import GlobalFilter from "../utils/GlobalFilter";
+import SelectOptionsFilter from "../utils/SelectOptionsFilter";
 
 const TournamentTable = ({ data, theme }) => {
   const breakpoint = useBreakpoint();
@@ -98,7 +99,7 @@ const TournamentTable = ({ data, theme }) => {
         ],
       },
       {
-        Header: "playoffs",
+        Header: "Playoffs",
         columns: [
           {
             Header: "Round",
@@ -174,6 +175,16 @@ const TournamentTable = ({ data, theme }) => {
           },
         ],
       },
+      {
+        Header: "Year",
+        columns: [
+          {
+            Header: "Year",
+            accessor: "year",
+            Filter: SelectOptionsFilter,
+          },
+        ],
+      },
     ],
     []
   );
@@ -215,7 +226,6 @@ const TournamentTable = ({ data, theme }) => {
     previousPage,
     setPageSize,
     state: { pageIndex, pageSize, globalFilter },
-
     // Search / Filtering Props
     preGlobalFilteredRows,
     setGlobalFilter,

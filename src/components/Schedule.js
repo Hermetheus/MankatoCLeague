@@ -13,6 +13,7 @@ import HomeScore from "./standings/Renderers/HomeScore";
 import VisitorScore from "./standings/Renderers/VisitorScore";
 import moment from "moment";
 import { lightTheme } from "../util/theme";
+import SelectOptionsFilter from "./utils/SelectOptionsFilter";
 
 const Schedule = ({ data, theme }) => {
   const columns = React.useMemo(
@@ -107,6 +108,16 @@ const Schedule = ({ data, theme }) => {
           {
             Header: "Official",
             accessor: "official",
+          },
+        ],
+      },
+      {
+        Header: "Year",
+        columns: [
+          {
+            Header: "Year",
+            accessor: "year",
+            Filter: SelectOptionsFilter,
           },
         ],
       },

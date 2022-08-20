@@ -1,9 +1,10 @@
 import React from "react";
+import { useState } from "react";
 import { useAsyncDebounce } from "react-table";
 import { lightTheme } from "../../util/theme";
 
-function GlobalFilter({ globalFilter, setGlobalFilter, theme }) {
-  const [value, setValue] = React.useState(globalFilter);
+function GlobalFilter({ globalFilter, setGlobalFilter }) {
+  const [value, setValue] = useState(globalFilter);
   const onChange = useAsyncDebounce((value) => {
     setGlobalFilter(value || undefined);
   }, 200);

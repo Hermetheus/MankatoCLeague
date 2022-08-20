@@ -8,6 +8,11 @@ const VisitorScore = (props) => {
       return <span className="text-danger">{cell.value}</span>;
     } else if (cell.row.original.visitorScore > cell.row.original.homeScore) {
       return <span className="text-success">{cell.value}</span>;
+    } else if (
+      cell.row.original.homeScore === null &&
+      cell.row.original.visitorScore === null
+    ) {
+      return <span>{cell.value}</span>;
     } else {
       return <span className="text-info">{cell.value}</span>;
     }
