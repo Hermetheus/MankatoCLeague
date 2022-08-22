@@ -1,161 +1,155 @@
-import hockeyStandings from "../data/hockeyStandings";
 import { Teams } from "./teams";
 
-export const getTotalHomeWins = () => {
-  let homeStats = [];
-  let totalHomePoints;
-  Object.keys(Teams).forEach((key) => {
-    let totalHomeWins = hockeyStandings.regularSeason.filter(
-      (game) => game.home === Teams[key] && game.homeScore > game.visitorScore
-    ).length;
+const getStandings = ({ data }) => {
+  console.log(data.mankatoCLeague);
+  let hockeyStandings = data.mankatoCLeague.hockeyStandings;
+  const getTotalHomeWins = () => {
+    let homeStats = [];
+    let totalHomePoints;
+    Object.keys(Teams).forEach((key) => {
+      let totalHomeWins = hockeyStandings.regularSeason.filter(
+        (game) => game.home === Teams[key] && game.homeScore > game.visitorScore
+      ).length;
 
-    totalHomePoints = totalHomeWins * 2;
+      totalHomePoints = totalHomeWins * 2;
 
-    homeStats.push([
-      {
+      homeStats.push({
         team: key,
         totalHomeWins: totalHomeWins,
         totalHomePoints: totalHomePoints,
-      },
-    ]);
-  });
-  return homeStats;
-};
+      });
+    });
+    return homeStats;
+  };
 
-export const getTotalVisitorWins = () => {
-  let visitorStats = [];
-  let totalVisitorPoints;
-  Object.keys(Teams).forEach((key) => {
-    let totalVisitorWins = hockeyStandings.regularSeason.filter(
-      (game) =>
-        game.visitor === Teams[key] && game.homeScore < game.visitorScore
-    ).length;
+  const getTotalVisitorWins = () => {
+    let visitorStats = [];
+    let totalVisitorPoints;
+    Object.keys(Teams).forEach((key) => {
+      let totalVisitorWins = hockeyStandings.regularSeason.filter(
+        (game) =>
+          game.visitor === Teams[key] && game.homeScore < game.visitorScore
+      ).length;
 
-    totalVisitorPoints = totalVisitorWins * 2;
+      totalVisitorPoints = totalVisitorWins * 2;
 
-    visitorStats.push([
-      {
+      visitorStats.push({
         team: key,
         totalVisitorWins: totalVisitorWins,
         totalVisitorPoints: totalVisitorPoints,
-      },
-    ]);
-  });
-  return visitorStats;
-};
+      });
+    });
+    return visitorStats;
+  };
 
-export const getTotalVisitorTies = () => {
-  let visitorTies = [];
-  Object.keys(Teams).forEach((key) => {
-    let totalVisitorTies = hockeyStandings.regularSeason.filter(
-      (game) =>
-        game.visitor === Teams[key] && game.homeScore === game.visitorScore
-    ).length;
+  const getTotalVisitorTies = () => {
+    let visitorTies = [];
+    Object.keys(Teams).forEach((key) => {
+      let totalVisitorTies = hockeyStandings.regularSeason.filter(
+        (game) =>
+          game.visitor === Teams[key] && game.homeScore === game.visitorScore
+      ).length;
 
-    visitorTies.push([
-      {
+      visitorTies.push({
         team: key,
         totalVisitorTies: totalVisitorTies,
         totalVisitorTiePoints: totalVisitorTies,
-      },
-    ]);
-  });
-  return [visitorTies];
-};
+      });
+    });
+    return [visitorTies];
+  };
 
-export const getTotalHomeTies = () => {
-  let homeTies = [];
-  Object.keys(Teams).forEach((key) => {
-    let totalHomeTies = hockeyStandings.regularSeason.filter(
-      (game) => game.home === Teams[key] && game.homeScore === game.visitorScore
-    ).length;
+  const getTotalHomeTies = () => {
+    let homeTies = [];
+    Object.keys(Teams).forEach((key) => {
+      let totalHomeTies = hockeyStandings.regularSeason.filter(
+        (game) =>
+          game.home === Teams[key] && game.homeScore === game.visitorScore
+      ).length;
 
-    homeTies.push([
-      {
+      homeTies.push({
         team: key,
         totalHomeTies: totalHomeTies,
         totalHomeTiePoints: totalHomeTies,
-      },
-    ]);
-  });
-  return homeTies;
-};
+      });
+    });
+    return homeTies;
+  };
 
-export const getTotalHomeGoals = () => {
-  let homeGoals = [];
-  Object.keys(Teams).forEach((key) => {
-    let totalHomeGoals = hockeyStandings.regularSeason
-      .filter((game) => game.home === Teams[key] && game.homeScore)
-      .reduce((a, b) => a + b.homeScore, 0);
+  const getTotalHomeGoals = () => {
+    let homeGoals = [];
+    Object.keys(Teams).forEach((key) => {
+      let totalHomeGoals = hockeyStandings.regularSeason
+        .filter((game) => game.home === Teams[key] && game.homeScore)
+        .reduce((a, b) => a + b.homeScore, 0);
 
-    homeGoals.push([
-      {
+      homeGoals.push({
         team: key,
         totalHomeGoals: totalHomeGoals,
-      },
-    ]);
-  });
-  return homeGoals;
-};
+      });
+    });
+    return homeGoals;
+  };
 
-export const getTotalVisitorGoals = () => {
-  let totalVisitorGoals = [];
-  Object.keys(Teams).forEach((key) => {
-    let visitorGoals = hockeyStandings.regularSeason
-      .filter((game) => game.visitor === Teams[key] && game.visitorScore)
-      .reduce((a, b) => a + b.visitorScore, 0);
+  const getTotalVisitorGoals = () => {
+    let totalVisitorGoals = [];
+    Object.keys(Teams).forEach((key) => {
+      let visitorGoals = hockeyStandings.regularSeason
+        .filter((game) => game.visitor === Teams[key] && game.visitorScore)
+        .reduce((a, b) => a + b.visitorScore, 0);
 
-    totalVisitorGoals.push([
-      {
+      totalVisitorGoals.push({
         team: key,
         visitorGoals: visitorGoals,
-      },
-    ]);
-  });
-  return totalVisitorGoals;
-};
+      });
+    });
+    return totalVisitorGoals;
+  };
 
-export const getTotalHomeGoalsAgainst = () => {
-  let totalHomeGoalsAgainst = [];
-  Object.keys(Teams).forEach((key) => {
-    let homeGoalsAgainst = hockeyStandings.regularSeason
-      .filter((game) => game.home === Teams[key] && game.visitorScore)
-      .reduce((a, b) => a + b.visitorScore, 0);
+  const getTotalHomeGoalsAgainst = () => {
+    let totalHomeGoalsAgainst = [];
+    Object.keys(Teams).forEach((key) => {
+      let homeGoalsAgainst = hockeyStandings.regularSeason
+        .filter((game) => game.home === Teams[key] && game.visitorScore)
+        .reduce((a, b) => a + b.visitorScore, 0);
 
-    totalHomeGoalsAgainst.push([
-      {
+      totalHomeGoalsAgainst.push({
         team: key,
         homeGoalsAgainst: homeGoalsAgainst,
-      },
-    ]);
-  });
-  return totalHomeGoalsAgainst;
-};
+      });
+    });
+    return totalHomeGoalsAgainst;
+  };
 
-export const getTotalVisitorGoalsAgainst = () => {
-  let visitorGoalsAgainst = [];
-  Object.keys(Teams).forEach((key) => {
-    let totalHomePoints = hockeyStandings.regularSeason
-      .filter((game) => game.visitor === Teams[key] && game.homeScore)
-      .reduce((a, b) => a + b.homeScore, 0);
+  const getTotalVisitorGoalsAgainst = () => {
+    let visitorGoalsAgainst = [];
+    Object.keys(Teams).forEach((key) => {
+      let totalHomePoints = hockeyStandings.regularSeason
+        .filter((game) => game.visitor === Teams[key] && game.homeScore)
+        .reduce((a, b) => a + b.homeScore, 0);
 
-    visitorGoalsAgainst.push([
-      {
+      visitorGoalsAgainst.push({
         team: key,
         totalHomePoints: totalHomePoints,
-      },
-    ]);
-  });
-  return visitorGoalsAgainst;
+      });
+    });
+    return visitorGoalsAgainst;
+  };
+
+  let allStandingsData = [
+    {
+      homeWins: getTotalHomeWins(),
+      visitorWins: getTotalVisitorWins(),
+      homeTies: getTotalHomeTies(),
+      visitorTies: getTotalVisitorTies(),
+      homeGoals: getTotalHomeGoals(),
+      visitorGoals: getTotalVisitorGoals(),
+      homeGoalsAgainst: getTotalHomeGoalsAgainst(),
+      visitorGoalsAgainst: getTotalVisitorGoalsAgainst(),
+    },
+  ];
+
+  return allStandingsData;
 };
 
-export const allStandingsData = {
-  homeWins: getTotalHomeWins(),
-  visitorWins: getTotalVisitorWins(),
-  homeTies: getTotalHomeTies(),
-  visitorTies: getTotalVisitorTies(),
-  homeGoals: getTotalHomeGoals(),
-  visitorGoals: getTotalVisitorGoals(),
-  homeGoalsAgainst: getTotalHomeGoalsAgainst(),
-  visitorGoalsAgainst: getTotalVisitorGoalsAgainst(),
-};
+export default getStandings;

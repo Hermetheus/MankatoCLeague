@@ -24,6 +24,8 @@ import SelectOptionsFilter from "../utils/SelectOptionsFilter";
 const TournamentTable = ({ data, theme }) => {
   const breakpoint = useBreakpoint();
 
+  console.log(data);
+
   const columns = React.useMemo(
     () => [
       {
